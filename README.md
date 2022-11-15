@@ -1,231 +1,94 @@
-# Substrate Node Template
+# Case Study: Construction Pallet
 
-[![Try on playground](https://img.shields.io/badge/Playground-Node_Template-brightgreen?logo=Parity%20Substrate)](https://docs.substrate.io/playground/) [![Matrix](https://img.shields.io/matrix/substrate-technical:matrix.org)](https://matrix.to/#/#substrate-technical:matrix.org)
+## Table of Contents
 
-A fresh FRAME-based [Substrate](https://www.substrate.io/) node, ready for hacking :rocket:
+ 1. Overview
+ 1. Business Opportunity
+    1. Introduction
+    1. Parties
+    1. Process
+    1. Non-functional Requierements
+ 1. Solution Proposal
+ 1. Functional Requirements
+ 1. Data Model
 
-## Getting Started
+## Overview
 
-Follow the steps below to get started with the Node Template, or get it up and running right from
-your browser in just a few clicks using
-the [Substrate Playground](https://docs.substrate.io/playground/) :hammer_and_wrench:
+This documentation provides an overview to the idea of a "Construction Pallet", where it can be applied and the reasoning behind it. It defines the users, their interactions and a base set of functional requirements which the pallet could implement. Furthermore, it proposes a base data model which covers the functional requirements and can be expanded upon for more functionality.
 
-### Using Nix
+## Business Opportunity
 
-Install [nix](https://nixos.org/) and optionally [direnv](https://github.com/direnv/direnv) and
-[lorri](https://github.com/nix-community/lorri) for a fully plug and play experience for setting up
-the development environment. To get all the correct dependencies activate direnv `direnv allow` and
-lorri `lorri shell`.
+### Introduction
 
-### Rust Setup
+Civil Engineering Ltd. is a construction company which operates worldwide focuses on social infrastructure.
 
-First, complete the [basic Rust setup instructions](./docs/rust-setup.md).
+It manages large scale multinational construction projects as a *contractor* and employs other businesses as *subcontractors* to fulfill manual work on the site.
 
-### Run
+### Parties
 
-Use Rust's native `cargo` command to build and launch the template node:
+#### Contractor
 
-```sh
-cargo run --release -- --dev
-```
+- A large construction corporation.
+- Won the bidding for a large construction project.
+- Manages the construction site with its *construction engineers*.
 
-### Build
+#### Subcontractors
 
-The `cargo run` command will perform an initial build. Use the following command to build the node
-without launching it:
+- Multiple small to large construction companies.
+- Are hired by the contracor company to perform manual labour on a construction site with their *construction workers*.
 
-```sh
-cargo build --release
-```
+### Interactions
 
-### Embedded Docs
+- One contractor hires at least one subcontractor to perform labour on the construction site.
+- The subcontractor reports the finished work to the contractor.
+- The contractor evaluates the reports.
+- Subcontractor gets monthly/weekly payments based on reports.
 
-Once the project has been built, the following command can be used to explore all parameters and
-subcommands:
+### Example Process
 
-```sh
-./target/release/node-template -h
-```
+Simplified, high level process description on what happens when a construction project starts. For this example we assume that the contracting company won a bidding for a large construction project. The contractor is hiring a small company as a subcontractor to build the concrete floor and walls of the basement.
 
-## Run
+**Step 1:** A small subcontractor company signs a contract for a civil engineering project.
 
-The provided `cargo run` command will launch a temporary node and its state will be discarded after
-you terminate the process. After the project has been built, there are other ways to launch the
-node.
+**Step 2:** The subcontractor is tasked with building the concrete floor and walls of the basement.
 
-### Single-Node Development Chain
+**Step 3:** The construction workers locate the construction site and start performing their work.
 
-This command will start the single-node development chain with non-persistent state:
+**Step 4:** Once they finished the work, they record it and communicate the progress to the construction manager of the contracting company.
 
-```bash
-./target/release/node-template --dev
-```
+**Step 5:** The construction manager evaluates the record and approves, declines or claims additional work.
 
-Purge the development chain's state:
+**Step 6:** If the work is approved, the construction manager notifies the subcontractor company and forwards the record to accounting.
 
-```bash
-./target/release/node-template purge-chain --dev
-```
+**Step 7:** The subcontractor company issues an invoice to the contracting company.
 
-Start the development chain with detailed logging:
+**Step8:** Accounting issues a transfer to the subcontractor company after receiving the invoice.
 
-```bash
-RUST_BACKTRACE=1 ./target/release/node-template -ldebug --dev
-```
+**Step 9:** If the work is declined, the construction manager notifies the subcontractor company and the record is not forwarded to accounting.
 
-> Development chain means that the state of our chain will be in a tmp folder while the nodes are
-> running. Also, **alice** account will be authority and sudo account as declared in the
-> [genesis state](https://github.com/substrate-developer-hub/substrate-node-template/blob/main/node/src/chain_spec.rs#L49).
-> At the same time the following accounts will be pre-funded:
-> - Alice
-> - Bob
-> - Alice//stash
-> - Bob//stash
+**Step 10:** If additional work is claimed, the subcontractor has to perform additional work and send a new record for evaluation.
 
-In case of being interested in maintaining the chain' state between runs a base path must be added
-so the db can be stored in the provided folder instead of a temporal one. We could use this folder
-to store different chain databases, as a different folder will be created per different chain that
-is ran. The following commands shows how to use a newly created folder as our db base path.
+### Pain Points
 
-```bash
-// Create a folder to use as the db base path
-$ mkdir my-chain-state
+The construction industry is the second least digitized industry in the world. For that reason the straight forward process outlined above contains multiple pain points which are unsolved in todays construction business.
 
-// Use of that folder to store the chain state
-$ ./target/release/node-template --dev --base-path ./my-chain-state/
+This lack of digitization of the processes on a construction site leads to lack of a clear business policy in how the recordings of finished work between partners are processed and documented.
 
-// Check the folder structure created inside the base path after running the chain
-$ ls ./my-chain-state
-chains
-$ ls ./my-chain-state/chains/
-dev
-$ ls ./my-chain-state/chains/dev
-db keystore network
-```
+Recordings are getting lost regularly and there is confusion about working hours and spent materials. This confusion leads to disputes which amount anually to 15% of project costs.
 
+The processes on a construction site involve to a lot of paperwork and a manual, labout intensive invocing process for the subcontractor. Invoices contain errors, must be corrected and payouts get delayed.
 
-### Connect with Polkadot-JS Apps Front-end
+To summarize:
 
-Once the node template is running locally, you can connect it with **Polkadot-JS Apps** front-end
-to interact with your chain. [Click
-here](https://polkadot.js.org/apps/#/explorer?rpc=ws://localhost:9944) connecting the Apps to your
-local node template.
+1. Absent clear business policy on processing and documentation of recordings.
+2. Costly disputes because of lost and incorrect recordings.
+3. Manual, labout intensive invoicing process with delayed payouts.
 
-### Multi-Node Local Testnet
+## Solution Proposal
 
-If you want to see the multi-node consensus algorithm in action, refer to our
-[Simulate a network tutorial](https://docs.substrate.io/tutorials/get-started/simulate-network/).
+A construction Blockchain application for recording of manual labour, record evaluation and invoice generation which would addresses the pain points mentioned above.
 
-## Template Structure
+### Arguments for a Blockchain
 
-A Substrate project such as this consists of a number of components that are spread across a few
-directories.
-
-### Node
-
-A blockchain node is an application that allows users to participate in a blockchain network.
-Substrate-based blockchain nodes expose a number of capabilities:
-
-- Networking: Substrate nodes use the [`libp2p`](https://libp2p.io/) networking stack to allow the
-  nodes in the network to communicate with one another.
-- Consensus: Blockchains must have a way to come to
-  [consensus](https://docs.substrate.io/main-docs/fundamentals/consensus/) on the state of the
-  network. Substrate makes it possible to supply custom consensus engines and also ships with
-  several consensus mechanisms that have been built on top of
-  [Web3 Foundation research](https://research.web3.foundation/en/latest/polkadot/NPoS/index.html).
-- RPC Server: A remote procedure call (RPC) server is used to interact with Substrate nodes.
-
-There are several files in the `node` directory - take special note of the following:
-
-- [`chain_spec.rs`](./node/src/chain_spec.rs): A
-  [chain specification](https://docs.substrate.io/main-docs/build/chain-spec/) is a
-  source code file that defines a Substrate chain's initial (genesis) state. Chain specifications
-  are useful for development and testing, and critical when architecting the launch of a
-  production chain. Take note of the `development_config` and `testnet_genesis` functions, which
-  are used to define the genesis state for the local development chain configuration. These
-  functions identify some
-  [well-known accounts](https://docs.substrate.io/reference/command-line-tools/subkey/)
-  and use them to configure the blockchain's initial state.
-- [`service.rs`](./node/src/service.rs): This file defines the node implementation. Take note of
-  the libraries that this file imports and the names of the functions it invokes. In particular,
-  there are references to consensus-related topics, such as the
-  [block finalization and forks](https://docs.substrate.io/main-docs/fundamentals/consensus/#finalization-and-forks)
-  and other [consensus mechanisms](https://docs.substrate.io/main-docs/fundamentals/consensus/#default-consensus-models)
-  such as Aura for block authoring and GRANDPA for finality.
-
-After the node has been [built](#build), refer to the embedded documentation to learn more about the
-capabilities and configuration parameters that it exposes:
-
-```shell
-./target/release/node-template --help
-```
-
-### Runtime
-
-In Substrate, the terms
-"runtime" and "state transition function"
-are analogous - they refer to the core logic of the blockchain that is responsible for validating
-blocks and executing the state changes they define. The Substrate project in this repository uses
-[FRAME](https://docs.substrate.io/main-docs/fundamentals/runtime-intro/#frame) to construct a
-blockchain runtime. FRAME allows runtime developers to declare domain-specific logic in modules
-called "pallets". At the heart of FRAME is a helpful
-[macro language](https://docs.substrate.io/reference/frame-macros/) that makes it easy to
-create pallets and flexibly compose them to create blockchains that can address
-[a variety of needs](https://substrate.io/ecosystem/projects/).
-
-Review the [FRAME runtime implementation](./runtime/src/lib.rs) included in this template and note
-the following:
-
-- This file configures several pallets to include in the runtime. Each pallet configuration is
-  defined by a code block that begins with `impl $PALLET_NAME::Config for Runtime`.
-- The pallets are composed into a single runtime by way of the
-  [`construct_runtime!`](https://crates.parity.io/frame_support/macro.construct_runtime.html)
-  macro, which is part of the core
-  FRAME Support [system](https://docs.substrate.io/reference/frame-pallets/#system-pallets) library.
-
-### Pallets
-
-The runtime in this project is constructed using many FRAME pallets that ship with the
-[core Substrate repository](https://github.com/paritytech/substrate/tree/master/frame) and a
-template pallet that is [defined in the `pallets`](./pallets/template/src/lib.rs) directory.
-
-A FRAME pallet is compromised of a number of blockchain primitives:
-
-- Storage: FRAME defines a rich set of powerful
-  [storage abstractions](https://docs.substrate.io/main-docs/build/runtime-storage/) that makes
-  it easy to use Substrate's efficient key-value database to manage the evolving state of a
-  blockchain.
-- Dispatchables: FRAME pallets define special types of functions that can be invoked (dispatched)
-  from outside of the runtime in order to update its state.
-- Events: Substrate uses [events and errors](https://docs.substrate.io/main-docs/build/events-errors/)
-  to notify users of important changes in the runtime.
-- Errors: When a dispatchable fails, it returns an error.
-- Config: The `Config` configuration interface is used to define the types and parameters upon
-  which a FRAME pallet depends.
-
-### Run in Docker
-
-First, install [Docker](https://docs.docker.com/get-docker/) and
-[Docker Compose](https://docs.docker.com/compose/install/).
-
-Then run the following command to start a single node development chain.
-
-```bash
-./scripts/docker_run.sh
-```
-
-This command will firstly compile your code, and then start a local development network. You can
-also replace the default command
-(`cargo build --release && ./target/release/node-template --dev --ws-external`)
-by appending your own. A few useful ones are as follow.
-
-```bash
-# Run Substrate node without re-compiling
-./scripts/docker_run.sh ./target/release/node-template --dev --ws-external
-
-# Purge the local dev chain
-./scripts/docker_run.sh ./target/release/node-template purge-chain --dev
-
-# Check whether the code is compilable
-./scripts/docker_run.sh cargo check
-```
+- **Shared state and immutability:** Both help resolve disputes because work and spent materials are recorded and shared among participants.
+- **Chaincode:** Resolves absent clear business policy. With Chaincode there will be an agreed upon digitized process which can emit events and trigger invoice creation or payment rollouts.
