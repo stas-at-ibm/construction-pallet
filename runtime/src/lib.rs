@@ -271,7 +271,13 @@ impl pallet_sudo::Config for Runtime {
 }
 
 /// Configure the pallet-template in pallets/template.
-impl pallet_template::Config for Runtime {}
+impl pallet_template::Config for Runtime {
+	type StringLimit = StringLimit;
+}
+
+parameter_types! {
+	pub const StringLimit: u32 = 50;
+}
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
