@@ -1,8 +1,5 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
-/// Edit this file to define custom logic or remove it if it is not needed.
-/// Learn more about FRAME and the core library of Substrate FRAME pallets:
-/// <https://docs.substrate.io/reference/frame-pallets/>
 pub use pallet::*;
 mod types;
 pub use types::*;
@@ -10,7 +7,7 @@ pub use types::*;
 #[frame_support::pallet]
 pub mod pallet {
 	use super::*;
-	use frame_support::pallet_prelude::*;
+	use frame_support::{pallet_prelude::*, BoundedVec};
 	use frame_system::pallet_prelude::*;
 
 	#[pallet::pallet]
@@ -28,6 +25,45 @@ pub mod pallet {
 	#[pallet::getter(fn meta_data)]
 	pub(super) type ProjectStore<T: Config> =
 		StorageValue<_, Project<T::AccountId, BoundedVec<u8, T::StringLimit>>, OptionQuery>;
+
+	// genesis state config: https://docs.substrate.io/reference/how-to-guides/basics/configure-genesis-state/
+	#[pallet::genesis_config]
+	pub struct GenesisConfig<T: Config> {
+		pub construction_manager: T::AccountId,
+	}
+
+	#[cfg(feature = "std")]
+	impl<T: Config> Default for GenesisConfig<T> {
+		fn default() -> Self {
+			Self { construction_manager: Default::default() }
+		}
+	}
+
+	#[pallet::genesis_build]
+	impl<T: Config> GenesisBuild<T> for GenesisConfig<T> {
+		fn build(&self) {
+			let id: BoundedVec<u8, T::StringLimit> =
+				"projectID01".as_bytes().to_vec().clone().try_into().expect("string to long");
+			let boq_id: BoundedVec<u8, T::StringLimit> =
+				"to_be_added".as_bytes().to_vec().clone().try_into().expect("string to long");
+			let title: BoundedVec<u8, T::StringLimit> = "Elbphilharmonie Hamburg"
+				.as_bytes()
+				.to_vec()
+				.clone()
+				.try_into()
+				.expect("string to long");
+			let location: BoundedVec<u8, T::StringLimit> =
+				"Platz d. Deutschen Einheit 4, 20457 Hamburg, DE"
+					.as_bytes()
+					.to_vec()
+					.clone()
+					.try_into()
+					.expect("string to long");
+			let construction_manager = self.construction_manager.clone();
+
+			ProjectStore::<T>::put(Project { id, boq_id, title, location, construction_manager });
+		}
+	}
 
 	#[pallet::call]
 	impl<T: Config> Pallet<T> {
