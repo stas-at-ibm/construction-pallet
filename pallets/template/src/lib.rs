@@ -4,6 +4,8 @@
 /// Learn more about FRAME and the core library of Substrate FRAME pallets:
 /// <https://docs.substrate.io/reference/frame-pallets/>
 pub use pallet::*;
+mod types;
+pub use types::*;
 
 #[frame_support::pallet]
 pub mod pallet {
