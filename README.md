@@ -2,15 +2,11 @@
 
 ## Table of Contents
 
- 1. Overview
- 1. Business Opportunity
-    1. Introduction
-    1. Parties
-    1. Process
-    1. Non-functional Requierements
- 1. Solution Proposal
- 1. Functional Requirements
- 1. Data Model
+ 1. [Overview](#overview)
+ 1. [Business Opportunity](#business-opportunity)
+ 1. [Solution Proposal](#solution-proposal)
+ 1. [Delivery Proposal](#delivery-proposal)
+ 1. [Proof of Concept](#proof-of-concept)
 
 ## Overview
 
@@ -144,14 +140,14 @@ To make sure the Substrate Blockchain is the right choise a three phase approach
 
 ### Functional Requirements
 
-| #      | Functional Requirement  | User        | Comment |
-| ------ | ----------------------- | ----------- | ------- |
-| 1      | Create project.         | Application | Init with mock data in genesis block.|
-| 2      | Create bill of quantity.| Application | Init with mock data in genesis block.|
-| 3      | Query bill of quantity. | Contractor, Subcontractor | Needed for quantity measurement creation. |
-| 4      | Create/submit quantity measurement.| Subcontractor | Submitted after creation, no draft. |
-| 5      | Query all quantity measurements.| Subcontractor, Contractor | - |
-| 6      | Query one quantity measurement.| Subcontractor, Contractor | Quantity measurement details for evaluation. |
-| 7      | Evaluate quantity measurement. | Contractor | Set status to approved, declined, etc.  |
-| 8      | Generate invoice. | Application | Automatic generation based on approved quantity measurements. |
-| 9      | Query all invoices. | Subcontractor, Contractor | - |
+| # | Functional Requirement  | User        | Comment |
+| - | ----------------------- | ----------- | ------- |
+| 1 | Create project.         | Application | Init with mock data in genesis block.|
+| 2 | Create bill of quantity.| Application | Init with mock data in genesis block.|
+| 3 | Query bill of quantity. | Contractor, Subcontractor | Needed for quantity measurement creation. |
+| 4 | Create/submit quantity measurement.| Subcontractor | Submitted after creation, no draft. |
+| 5 | Query all quantity measurements.| Subcontractor, Contractor | - |
+| 6 | Query one quantity measurement.| Subcontractor, Contractor | Quantity measurement details for evaluation. |
+| 7 | Evaluate quantity measurement. | Contractor | Set status to approved, declined, etc.  |
+| 8 | Generate invoice. | Application | Automatic generation based on approved quantity measurements. |
+| 9 | Query all invoices. | Subcontractor, Contractor | - |
