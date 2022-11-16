@@ -30,7 +30,7 @@ pub mod pallet {
 	// - basic example pallet: https://github.com/paritytech/substrate/blob/master/frame/examples/basic/src/lib.rs
 	#[pallet::genesis_config]
 	pub struct GenesisConfig<T: Config> {
-		pub construction_manager: T::AccountId,
+		pub account_map: Vec<T::AccountId>,
 	}
 
 	// - PR remove default for accountid: https://github.com/paritytech/substrate/pull/10403
@@ -38,7 +38,7 @@ pub mod pallet {
 	#[cfg(feature = "std")]
 	impl<T: Config> Default for GenesisConfig<T> {
 		fn default() -> Self {
-			Self { construction_manager: Default::default() }
+			Self { account_map: Default::default() }
 		}
 	}
 
@@ -62,7 +62,7 @@ pub mod pallet {
 					.clone()
 					.try_into()
 					.expect("string to long");
-			let construction_manager = self.construction_manager.clone();
+			let construction_manager = self.account_map[0].clone();
 
 			ProjectStore::<T>::put(Project { id, boq_id, title, location, construction_manager });
 		}

@@ -156,9 +156,7 @@ fn testnet_genesis(
 			// Assign network admin rights.
 			key: Some(root_key),
 		},
-		template_module: TemplateModuleConfig {
-			construction_manager: accounts_to_map.iter().clone().take(1).collect(),
-		},
+		template_module: TemplateModuleConfig { account_map: accounts_to_map.clone() },
 		transaction_payment: Default::default(),
 	}
 }
