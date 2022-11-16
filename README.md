@@ -135,3 +135,23 @@ To make sure the Substrate Blockchain is the right choise a three phase approach
    - Extended feature set which is usable in day to day work without taking exceptions into account.
 1. Phase 3 - Extended Minimal Viable Product
    - Extended feature set which is usable in day to day work taking exceptions into account.
+
+## Proof of Concept
+
+- Using Substrate build a construction Blockchain which can demonstrate happy paths of quantity measurement creation, evaluation and automated invoice generation.
+- If possible demonstrate a transaction with one node running on desktop and the other on a mobile device.
+- As a base for functional requirements refer to the outlined [example process](#example-process) above.
+
+### Functional Requirements
+
+| #      | Functional Requirement  | User        | Comment |
+| ------ | ----------------------- | ----------- | ------- |
+| 1      | Create project.         | Application | Init with mock data in genesis block.|
+| 2      | Create bill of quantity.| Application | Init with mock data in genesis block.|
+| 3      | Query bill of quantity. | Contractor, Subcontractor | Needed for quantity measurement creation. |
+| 4      | Create/submit quantity measurement.| Subcontractor | Submitted after creation, no draft. |
+| 5      | Query all quantity measurements.| Subcontractor, Contractor | - |
+| 6      | Query one quantity measurement.| Subcontractor, Contractor | Quantity measurement details for evaluation. |
+| 7      | Evaluate quantity measurement. | Contractor | Set status to approved, declined, etc.  |
+| 8      | Generate invoice. | Application | Automatic generation based on approved quantity measurements. |
+| 9      | Query all invoices. | Subcontractor, Contractor | - |
