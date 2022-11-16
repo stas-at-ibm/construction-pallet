@@ -151,3 +151,7 @@ To make sure the Substrate Blockchain is the right choise a three phase approach
 | 7 | Evaluate quantity measurement. | Contractor | Set status to approved, declined, etc.  |
 | 8 | Generate invoice. | Application | Automatic generation based on approved quantity measurements. |
 | 9 | Query all invoices. | Subcontractor, Contractor | - |
+
+### Data Model
+
+![datamodel](/docs/datamodel.drawio.png)
