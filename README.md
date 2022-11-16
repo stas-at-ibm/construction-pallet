@@ -34,7 +34,7 @@ It manages large scale multinational construction projects as a *contractor* and
 
 #### Subcontractors
 
-- Multiple small to large construction companies.
+- Multiple small to medium sized construction companies and in rare cases also large corporations.
 - Are hired by the contracor company to perform manual labour on a construction site with their *construction workers*.
 
 ### Interactions
@@ -84,11 +84,39 @@ To summarize:
 2. Costly disputes because of lost and incorrect recordings.
 3. Manual, labout intensive invoicing process with delayed payouts.
 
+### Additional Context
+
+We have to be aware of the context in which the construction business operates. The contractors are usually large corporations, the subcontractors mostly small to medium sized businesses. The contractors usually have IT departments, they own companies which create software for them and in some cases they use the cloud. The subcontractors have no IT department, and basic understanding of software. The construction workes have mobile phones and the offices a few PC.
+
 ## Solution Proposal
 
 A construction Blockchain application for recording of manual labour, record evaluation and invoice generation which would addresses the pain points mentioned above.
 
-### Arguments for a Blockchain
+### Arguments For a Blockchain
 
 - **Shared state and immutability:** Both help resolve disputes because work and spent materials are recorded and shared among participants.
 - **Chaincode:** Resolves absent clear business policy. With Chaincode there will be an agreed upon digitized process which can emit events and trigger invoice creation or payment rollouts.
+- **Trust:** The first two arguments create trust implicitly. Data and the business policy are shared.
+- **Tokens:** Can be used as an incentive to use the application. Users could receive tokens for approved quantity measurement.
+
+### Arguments Against a Blockchain
+
+- **Complexity:** Infrastructure setup and operations are complex and expensive.
+- **Talent:** Its difficult to find talent on the market for Blockchain setup, operations and Chaincode development.
+- **Solutions:** The are no known construction Blockchain solutions on the market which means existing solutions must be tailored or general solutions.
+
+### Traditional Application
+
+Question: Why not just use a traditional application with a shared database? It would solve the issue with lost recordings and the code would define a buiness policy.
+
+Answer: Subcontractors are mostly small to medium sized businesses. They won't be able to host a node, monitor the data or understand the code.
+
+### Substrate
+
+Substrate is a Blockchain SDK which offers unique capabilities for building a customised Blockchain solution from ready to use modules (called pallets) which take care of networking, storage, consensus and more.
+
+One core feature is its WebAssembly runtime. With that it is possible to create a minimalistic node as part of a web application or a mobile app. There is no need to host a node or an entire Blockchain network. This opens up the benefits of Blockchain application to mobile phone users.
+
+With Substrate a custom construction site Blockchain can be build using available pallets and a specialised construction pallet which covers the construction site specifics. It could be installed on the mobile phones of construction workers and become a node. The contractor companies could use it via a desktop computer as a web application with their node/s in the cloud.
+
+**CONTINUE_HERE**: list remaining pain points, delivery proposal, outline poc, add functional req, add data model diagram
