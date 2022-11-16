@@ -26,12 +26,15 @@ pub mod pallet {
 	pub(super) type ProjectStore<T: Config> =
 		StorageValue<_, Project<T::AccountId, BoundedVec<u8, T::StringLimit>>, OptionQuery>;
 
-	// genesis state config: https://docs.substrate.io/reference/how-to-guides/basics/configure-genesis-state/
+	// - genesis state config: https://docs.substrate.io/reference/how-to-guides/basics/configure-genesis-state/
+	// - basic example pallet: https://github.com/paritytech/substrate/blob/master/frame/examples/basic/src/lib.rs
 	#[pallet::genesis_config]
 	pub struct GenesisConfig<T: Config> {
 		pub construction_manager: T::AccountId,
 	}
 
+	// - PR remove default for accountid: https://github.com/paritytech/substrate/pull/10403
+	// - stackoverflow: https://substrate.stackexchange.com/questions/4691/the-trait-stddefaultdefault-is-not-implemented-for-accountid?noredirect=1&lq=1
 	#[cfg(feature = "std")]
 	impl<T: Config> Default for GenesisConfig<T> {
 		fn default() -> Self {
