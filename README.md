@@ -18,7 +18,7 @@ This documentation provides an overview to the idea of a "Construction Pallet", 
 
 Civil Engineering Ltd. is a construction company which operates worldwide focuses on social infrastructure.
 
-It manages large scale multinational construction projects as a *contractor* and employs other businesses as *subcontractors* to fulfill manual work on the site.
+It manages large scale multinational construction projects as a *contractor* and employs other businesses as *subcontractors* to fulfil manual work on the site.
 
 ### Parties
 
@@ -31,7 +31,7 @@ It manages large scale multinational construction projects as a *contractor* and
 #### Subcontractors
 
 - Multiple small to medium sized construction companies and in rare cases also large corporations.
-- Are hired by the contracor company to perform manual labour on a construction site with their *construction workers*.
+- Are hired by the contractor company to perform manual labour on a construction site with their *construction workers*.
 
 ### Interactions
 
@@ -66,23 +66,23 @@ Simplified, high level process description on what happens when a construction p
 
 ### Pain Points
 
-The construction industry is the second least digitized industry in the world. For that reason the straight forward process outlined above contains multiple pain points which are unsolved in todays construction business.
+The construction industry is the second least digitised industry in the world. For that reason the straight forward process outlined above contains multiple pain points which are unsolved in todays construction business.
 
-This lack of digitization of the processes on a construction site leads to lack of a clear business policy in how the recordings of finished work between partners are processed and documented.
+This lack of digitisation of the processes on a construction site leads to lack of a clear business policy in how the recordings of finished work between partners are processed and documented.
 
-Recordings are getting lost regularly and there is confusion about working hours and spent materials. This confusion leads to disputes which amount anually to 15% of project costs.
+Recordings are getting lost regularly and there is confusion about working hours and spent materials. This confusion leads to disputes which amount annually to 15% of project costs.
 
-The processes on a construction site involve to a lot of paperwork and a manual, labout intensive invocing process for the subcontractor. Invoices contain errors, must be corrected and payouts get delayed.
+The processes on a construction site involve a lot of paperwork and a manual, labour intensive invoicing process for the subcontractor. Invoices contain errors, must be corrected and payouts get delayed.
 
-To summarize:
+To summarise:
 
 1. Absent clear business policy on processing and documentation of recordings.
 2. Costly disputes because of lost and incorrect recordings.
-3. Manual, labout intensive invoicing process with delayed payouts.
+3. Manual, labour intensive invoicing process with delayed payouts.
 
 ### Additional Context
 
-We have to be aware of the context in which the construction business operates. The contractors are usually large corporations, the subcontractors mostly small to medium sized businesses. The contractors usually have IT departments, they own companies which create software for them and in some cases they use the cloud. The subcontractors have no IT department, and basic understanding of software. The construction workes have mobile phones and the offices a few PC.
+We have to be aware of the context in which the construction business operates. The contractors are usually large corporations, the subcontractors mostly small to medium sized businesses. The contractors usually have IT departments, they own companies which create software for them and in some cases they use the cloud. The subcontractors have no IT department, and basic understanding of software. The construction workers have mobile phones and the offices a few PC.
 
 ## Solution Proposal
 
@@ -91,7 +91,7 @@ A construction Blockchain application for recording of manual labour, record eva
 ### Arguments For a Blockchain
 
 - **Shared state and immutability:** Both help resolve disputes because work and spent materials are recorded and shared among participants.
-- **Chaincode:** Resolves absent clear business policy. With Chaincode there will be an agreed upon digitized process which can emit events and trigger invoice creation or payment rollouts.
+- **Chaincode:** Resolves absent clear business policy. With Chaincode there will be an agreed upon digitised process which can emit events and trigger invoice creation or payment rollouts.
 - **Trust:** The first two arguments create trust implicitly. Data and the business policy are shared.
 - **Tokens:** Can be used as an incentive to use the application. Users could receive tokens for approved quantity measurement.
 
@@ -103,13 +103,13 @@ A construction Blockchain application for recording of manual labour, record eva
 
 ### Traditional Application
 
-Question: Why not just use a traditional application with a shared database? It would solve the issue with lost recordings and the code would define a buiness policy.
+Question: Why not just use a traditional application with a shared database? It would solve the issue with lost recordings and the code would define a business policy.
 
 Answer: Subcontractors are mostly small to medium sized businesses. They won't be able to host a node, monitor the data or understand the code.
 
 ### Substrate
 
-Substrate is a Blockchain SDK which offers unique capabilities for building a customised Blockchain solution from ready to use modules (called pallets) which take care of networking, storage, consensus and more.
+Substrate is a Blockchain SDK which offers unique capabilities for building a customised Blockchain solution from ready to use modules (pallets) which take care of networking, storage, consensus and more.
 
 One core feature is its WebAssembly runtime. With that it is possible to create a minimalistic node as part of a web application or a mobile app. There is no need to host a node in the cloud or setup and operate an entire Blockchain network for users with limited resources.
 
@@ -119,11 +119,11 @@ Contractor and subcontractor applications with build in nodes would form the Blo
 
 ### Verdict
 
-Using Substrate a construction Blockchain application can be created which resolves the core construction site pain points. However, it introduces a new pain point of difficult to find engineers with the needed skills.
+Using Substrate a construction Blockchain application can be created which resolves the core construction site pain points. However, it will be difficult to find engineers with the needed skills.
 
 ## Delivery Proposal
 
-To make sure the Substrate Blockchain is the right choise a three phase approach is proposed. When the leading phase is successfull the next can start:
+To make sure the Substrate Blockchain is the right choice a three phase approach is proposed. When the leading phase is successful the next can start:
 
 1. Phase 1 - Proof of Concept
    - A minimalistic demo with two nodes and core transactions implementation.
