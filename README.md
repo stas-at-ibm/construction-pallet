@@ -115,8 +115,23 @@ Answer: Subcontractors are mostly small to medium sized businesses. They won't b
 
 Substrate is a Blockchain SDK which offers unique capabilities for building a customised Blockchain solution from ready to use modules (called pallets) which take care of networking, storage, consensus and more.
 
-One core feature is its WebAssembly runtime. With that it is possible to create a minimalistic node as part of a web application or a mobile app. There is no need to host a node or an entire Blockchain network. This opens up the benefits of Blockchain application to mobile phone users.
+One core feature is its WebAssembly runtime. With that it is possible to create a minimalistic node as part of a web application or a mobile app. There is no need to host a node in the cloud or setup and operate an entire Blockchain network for users with limited resources.
 
 With Substrate a custom construction site Blockchain can be build using available pallets and a specialised construction pallet which covers the construction site specifics. It could be installed on the mobile phones of construction workers and become a node. The contractor companies could use it via a desktop computer as a web application with their node/s in the cloud.
 
-**CONTINUE_HERE**: list remaining pain points, delivery proposal, outline poc, add functional req, add data model diagram
+Contractor and subcontractor applications with build in nodes would form the Blockchain network.
+
+### Verdict
+
+Using Substrate a construction Blockchain application can be created which resolves the core construction site pain points. However, it introduces a new pain point of difficult to find engineers with the needed skills.
+
+## Delivery Proposal
+
+To make sure the Substrate Blockchain is the right choise a three phase approach is proposed. When the leading phase is successfull the next can start:
+
+1. Phase 1 - Proof of Concept
+   - A minimalistic demo with two nodes and core transactions implementation.
+1. Phase 2 - Minimal Viable Product
+   - Extended feature set which is usable in day to day work without taking exceptions into account.
+1. Phase 3 - Extended Minimal Viable Product
+   - Extended feature set which is usable in day to day work taking exceptions into account.
