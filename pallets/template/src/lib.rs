@@ -47,6 +47,7 @@ pub mod pallet {
 		fn build(&self) {
 			let err_msg = "string to long";
 
+			// TODO use randomness for ID generation: https://docs.substrate.io/reference/how-to-guides/pallet-design/incorporate-randomness/
 			ProjectStore::<T>::put(Project {
 				id: "projectID01".as_bytes().to_vec().try_into().expect(err_msg),
 				boq_id: "to_be_added".as_bytes().to_vec().try_into().expect(err_msg),
