@@ -45,26 +45,19 @@ pub mod pallet {
 	#[pallet::genesis_build]
 	impl<T: Config> GenesisBuild<T> for GenesisConfig<T> {
 		fn build(&self) {
-			let id: BoundedVec<u8, T::StringLimit> =
-				"projectID01".as_bytes().to_vec().clone().try_into().expect("string to long");
-			let boq_id: BoundedVec<u8, T::StringLimit> =
-				"to_be_added".as_bytes().to_vec().clone().try_into().expect("string to long");
-			let title: BoundedVec<u8, T::StringLimit> = "Elbphilharmonie Hamburg"
-				.as_bytes()
-				.to_vec()
-				.clone()
-				.try_into()
-				.expect("string to long");
-			let location: BoundedVec<u8, T::StringLimit> =
-				"Platz d. Deutschen Einheit 4, 20457 Hamburg, DE"
+			let err_msg = "string to long";
+
+			ProjectStore::<T>::put(Project {
+				id: "projectID01".as_bytes().to_vec().try_into().expect(err_msg),
+				boq_id: "to_be_added".as_bytes().to_vec().try_into().expect(err_msg),
+				title: "Elbphilharmonie Hamburg".as_bytes().to_vec().try_into().expect(err_msg),
+				location: "Platz d. Deutschen Einheit 4, 20457 Hamburg, DE"
 					.as_bytes()
 					.to_vec()
-					.clone()
 					.try_into()
-					.expect("string to long");
-			let construction_manager = self.account_map[0].clone();
-
-			ProjectStore::<T>::put(Project { id, boq_id, title, location, construction_manager });
+					.expect(err_msg),
+				construction_manager: self.account_map[0].clone(),
+			});
 		}
 	}
 
